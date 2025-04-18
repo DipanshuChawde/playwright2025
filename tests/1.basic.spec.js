@@ -19,3 +19,5 @@ test("verify title and url of web page",async({page})=>{
 
     
 })
+
+//npx playwright test 1.basic.spec.js --headed --project chromium
