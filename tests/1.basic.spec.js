@@ -15,9 +15,7 @@ test("verify title and url of web page",async({page})=>{
     await expect(page).toHaveTitle("STORE")
 
     await expect(page).toHaveURL("https://www.demoblaze.com/")
-
-
-    
+   
 })
 
 //npx playwright test 1.basic.spec.js --headed --project chromium
