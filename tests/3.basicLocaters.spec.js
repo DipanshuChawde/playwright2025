@@ -32,6 +32,9 @@ test("verify basic locators in playwright",async({page})=>{
     const logOutTxt = await page.locator('[id="logout2"]')
 
     await expect(logOutTxt).toBeVisible()
+
+    const userName = await page.locator('#nameofuser').textContent()
+    await expect(userName).toContain('dipanshu')
     await page.waitForTimeout(3000)
 
 })
