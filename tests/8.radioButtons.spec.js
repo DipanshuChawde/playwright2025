@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test"
 
-test('verify assertions in playwright', async ({ page }) => {
+test('verify radio buttons in playwright', async ({ page }) => {
     await page.goto('https://testautomationpractice.blogspot.com/')
 
     await page.fill('#name', 'dipanshu')
@@ -15,6 +15,9 @@ test('verify assertions in playwright', async ({ page }) => {
     await expect(male).not.toBeChecked()
     await male.check()
     await expect(male).toBeChecked()
+    await expect(male.isChecked()).toBeTruthy()
+
+    expect(await page.locator('//*[@id="female"]').isChecked()).toBeFalsy()
 
     await page.waitForTimeout(3000)
 
