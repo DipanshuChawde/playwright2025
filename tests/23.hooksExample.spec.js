@@ -29,6 +29,16 @@ test.beforeAll(async ({ browser }) => {
 
 test.afterAll(async () => {
     await console.log('i am in after all')
+    //empty cart
+    let deleteColumn = await page.$$('.table tbody tr td a')
+    for (let el of deleteColumn) {
+       let deleteColumn1 = await page.$$('.table tbody tr td a')
+        //await page.waitForTimeout(5000)
+        await deleteColumn1[0].click({delay : 100})
+        await page.waitForTimeout(3000)
+    }
+
+
     await page.click('#logout2')
     await page.waitForTimeout(3000)
 })
