@@ -3,21 +3,32 @@ import { expect } from "@playwright/test";
 exports.myClass = class myClass {
     constructor(page) {
         this.page = page,
-            this.homePage = 'li [href="index.html"]'
+        this.homePage = 'li [href="index.html"]'
         this.url = 'https://www.demoblaze.com/'
         this.loginCss = '#login2',
-            this.usernmCss = '#loginusername',
-            this.pwCss = '#loginpassword',
-            this.loginBtn = '[onclick="logIn()"]',
-
-            this.logoutVisible = '#logout2',
-            this.userNameCss = '#nameofuser'
+        this.usernmCss = '#loginusername',
+        this.pwCss = '#loginpassword',
+        this.loginBtn = '[onclick="logIn()"]',
+        this.logoutVisible = '#logout2',
+        this.userNameCss = '#nameofuser'
 
         //catogeries
         this.phoneBtn = `[onclick="byCat('phone')"]`,
-            this.monitorBtn = `[onclick="byCat('monitor')"]`,
-            this.laptopBtn = `[onclick="byCat('notebook')"]`
-
+        this.monitorBtn = `[onclick="byCat('monitor')"]`,
+        this.laptopBtn = `[onclick="byCat('notebook')"]`,
+        //cart
+        this.cartBtn = '#cartur',
+        //place order
+        this.placeOrderBtn = 'button[data-target="#orderModal"]',
+        //place order form
+        this.name = '#name',
+        this.country = '#country',
+        this.city = '#city',
+        this.creditCardNo = "#card",
+        this.month = '#month',
+        this.year = '#year',
+        this.purchaseBtn = '[onclick="purchaseOrder()"]',
+        this.okBtn = 'OK'
     }
 
 
@@ -57,24 +68,45 @@ exports.myClass = class myClass {
                 await this.page.waitForTimeout(2000)
             }
 
-            await this.page.getByRole('link', { name: product }).click()
-            await this.page.getByText('Add to cart').click()
-            await this.page.waitForTimeout(3000)
+        await this.page.getByRole('link', { name: product }).click()
+        await this.page.getByText('Add to cart').click()
+        await this.page.waitForTimeout(3000)
 
         }
         await this.page.waitForTimeout(3000)
     }
 
-    async emptyCart(){
+    async placeOrder(ud){
+        await this.page.locator(this.homePage).click()
+        await this.page.locator(this.cartBtn).click()
+        await this.page.waitForTimeout(2000)
+        await this.page.locator(this.placeOrderBtn).click()
+        await this.page.locator(this.name).fill(ud.name)
+        await this.page.locator(this.country).fill(ud.country)
+        await this.page.locator(this.city).fill(ud.city)
+        await this.page.locator(this.creditCardNo).fill(ud.creditcard)
+        await this.page.locator(this.month).fill(ud.month)
+        await this.page.locator(this.year).fill(ud.year)
+        await this.page.locator(this.purchaseBtn).click()
+        await this.page.getByText(this.okBtn).click()
+        await this.page.waitForTimeout(2000)
+
+
+
 
     }
 
-    async logout(){
+    async emptyCart() {
 
     }
 
-    async signInNewUser(){
-        
+    async logout() {
+        await this.page.locator(this.logoutVisible).click()
+
+    }
+
+    async signInNewUser() {
+
     }
 
 }
