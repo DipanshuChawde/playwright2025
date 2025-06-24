@@ -14,15 +14,20 @@ test('handle network call-getComment with page.on method', async ({ page }) => {
     page.on('response', async res => {
         console.log('Get Response-------------')
         console.log(`status : ${res.status()}`)
+        try {
+            const contentType = res.headers()['content-type']
 
-        const contentType = res.headers()['content-type']
-        if (contentType && contentType.includes('application/json')) {
-            const data = await res.json()
-            console.log('Resonse Body JSON : ', data)
+            if (contentType && contentType.includes('application/json')) {
+                const data = await res.json()
+                console.log('Resonse Body JSON : ', data)
+            }
+            else {
+                const data = awaitres.text()
+                console.log('Response Body Text : ', data)
+            }
         }
-        else {
-            const data = awaitres.text()
-            console.log('Response Body Text : ', data)
+        catch (err) {
+            console.log('Error found', err)
         }
     })
 
