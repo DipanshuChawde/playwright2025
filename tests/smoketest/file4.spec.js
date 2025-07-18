@@ -15,7 +15,7 @@ test('verify soft assertions in playwright', async ({ page }) => {
 
     await expect.soft(page).toHaveURL('https://demo.nopcommerce.com/register')
 
-    await expect.soft(page).toHaveTitle('nopCommerce demo store. Registerrrr')
+    await expect.soft(page).toHaveTitle('nopCommerce demo store. Register')
 
     await expect.soft(page.getByAltText('nopCommerce demo store')).toBeVisible()
 
