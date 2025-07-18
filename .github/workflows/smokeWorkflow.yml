@@ -1,0 +1,33 @@
+name: Run Playwright E2E (specific folder)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  playwright-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Install Playwright Browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # Step 5: Run Playwright Tests from specific folder
+      - name: Run Playwright tests
+        run: npx playwright test tests/smoketest
