@@ -30,4 +30,4 @@ jobs:
 
       # Step 5: Run Playwright Tests from specific folder
       - name: Run Playwright tests
-        run: npx playwright test tests/smoketest/**/*.spec.js
+        run: npx playwright test tests/smoketest
