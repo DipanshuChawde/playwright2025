@@ -1,20 +1,39 @@
-//import {test,expect} from "@playwright/test"
+import { test, expect } from "@playwright/test"
 
-const {test, expect} = require("@playwright/test")
+test('verify check box in playwright', async ({ page }) => {
+    await page.goto('https://testautomationpractice.blogspot.com/')
 
-test("verify title and url of page",async({page})=>{
-    //AAA
-    await page.goto('https://www.demoblaze.com/')
+    //     await page.locator('#sunday').click()
+    //     await page.waitForTimeout(3000)
+    //     await page.locator('#sunday').click()
+    //     await page.waitForTimeout(3000)
 
-   const pageTitle =  await page.title()
+    await page.locator('#sunday').check()
+    await page.waitForTimeout(3000)
+    await page.locator('#sunday').uncheck()
+    await page.waitForTimeout(3000)
 
-   console.log(`page title ${pageTitle}`)
-   console.log(await page.title())
-   await expect(page).toHaveTitle('STORE')
 
+    //check multiple check box
+    const checkBoxes = [
+        '#sunday',
+        '#monday',
+        '#tuesday',
+        '#wednesday',
+        '#thursday',
+        '[id="friday"]',
+        '//*[@id="saturday"]'
+    ]
 
-   const pageUrl = await page.url()
-   console.log(pageUrl)
+    for (let cb of checkBoxes) {
+        await page.check(cb)
+    }
+    await page.waitForTimeout(3000)
 
-   await expect(page).toHaveURL('https://www.demoblaze.com/')
+    for(let cb of checkBoxes){
+        if(await page.locator(cb).isChecked()){
+            await page.uncheck(cb)
+        }
+    }
+    await page.waitForTimeout(3000)
 })

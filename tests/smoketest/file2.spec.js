@@ -1,26 +1,25 @@
-const { test, expect } = require('@playwright/test')
+import {test, expect} from "@playwright/test"
+test('verify hidden dropdown in playwright',async({page})=>{
+    await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
 
-test("verify multiple locators in playwright", async ({ page }) => {
+    await page.fill('[name="username"]','Admin')
+    await page.fill('[name="password"]','admin123')
+    await page.click('[type="submit"]')
 
-    await page.goto('https://www.demoblaze.com/index.html')
+    await page.getByText('PIM').click()
+    await page.locator('[class="oxd-select-text--after"]').nth(2).click()
 
-    const links = await page.$$('//a')
-    for (let el of links) {
-        let linkText = await el.textContent()
-        console.log(linkText.trim())
-
-    }
-
-    await page.waitForSelector('#tbodyid > div > div > div > h4 > a')
-
-    const products = await page.$$('#tbodyid > div > div > div > h4 > a')
-    let count = await page.locator('#tbodyid > div > div > div > h4 > a').count()
-    console.log(`product count ${count}`)
-
-    for(let product of products){
-        let productName  =product.textContent()
-        console.log(`product name is : ${productName}`)
-    }
-
+    let jobText = await page.$$('[role="listbox"] >  [role="option"] > span')
     await page.waitForTimeout(3000)
+    for(let el of jobText){
+        let text1= await el.textContent()
+        console.log(text1)
+    }
+
+    await page.locator('div[data-v-d130bb63]>span[data-v-13cf171c]').nth(1).click()
+
+
+    //div[data-v-d130bb63]>span[data-v-13cf171c]
+
+    await page.waitForTimeout(5000)
 })
