@@ -30,6 +30,7 @@ test('verify check box in playwright', async ({ page }) => {
     }
     await page.waitForTimeout(3000)
 
+    
     for(let cb of checkBoxes){
         if(await page.locator(cb).isChecked()){
             await page.uncheck(cb)
